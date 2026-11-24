@@ -1,13 +1,16 @@
 const $ = s => document.querySelector(s);
 const CFG = window.GAME_CONFIG || {};
+const EDITION_ID = CFG.editionId || 'pep';
+const EDITION_NAME = CFG.editionName || '';
 const BOOK_ID = CFG.bookId || window.BOOK_ID || 'g3a';
 const BOOK = window.BOOKS.find(b => b.id === BOOK_ID);
 const UNIT_ID = CFG.unitId !== undefined ? CFG.unitId : (window.UNIT_ID || null);
 const UNIT = UNIT_ID ? BOOK.units.find(u => 'u' + u.no === UNIT_ID) : null;
 const NEXT_URL = CFG.nextUrl || null;
 const HOME_HASH = CFG.homeHash || null;
-if (UNIT) document.title = '单词保卫战 · ' + BOOK.name + ' Unit ' + UNIT.no + ' ' + UNIT.en;
-else if (BOOK) document.title = '单词保卫战 · ' + BOOK.name;
+const TITLE_PRE = EDITION_NAME && EDITION_ID !== 'pep' ? '单词保卫战 · ' + EDITION_NAME + ' ' : '单词保卫战 · ';
+if (UNIT) document.title = TITLE_PRE + BOOK.name + ' Unit ' + UNIT.no + ' ' + UNIT.en;
+else if (BOOK) document.title = TITLE_PRE + BOOK.name;
 BOOK.units.forEach(u => u.words.forEach(w => { w.id = w.id || w.w; w.group = w.same || w.id; }));
 
 /* ---------- 认读页家谱图例（uncle / aunt / cousin） ---------- */
@@ -39,7 +42,7 @@ const SPEEDS = [
 const WAVES = [3, 5, 7, 9];
 const SKINS = ['#9ccc65', '#aed581', '#8bc34a', '#a5c78a', '#b2c99a'];
 const CLOTHES = ['#5d7fa3', '#7b6a58', '#6d5f8d', '#4f7a6a', '#8a5a4a'];
-const SAVE_KEY = 'word-defense-v3';
+const SAVE_KEY = EDITION_ID === 'pep' ? 'word-defense-v3' : 'word-defense-v3:' + EDITION_ID;
 let save = { speed: 0, best: {} };
 try { Object.assign(save, JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')); } catch (e) {}
 if (!save.best || typeof save.best !== 'object') save.best = {};

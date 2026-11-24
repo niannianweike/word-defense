@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>单词保卫战 · 人教版小学英语</title>
-  <link rel="stylesheet" href="desk.css?v=book-stacks">
-  <script src="desk.js?v=book-stacks" defer></script>
+  <title>单词保卫战 · 小学英语</title>
+  <link rel="stylesheet" href="desk.css?v=multi-edition">
+  <script src="editions.js"></script>
+  <script src="words.js"></script>
+  <script src="words-jj.js"></script>
+  <script src="words-bnup.js"></script>
+  <script src="desk.js?v=multi-edition" defer></script>
 <link rel="stylesheet" href="phone-orientation.css">
 <link rel="stylesheet" href="https://niannianweike.top/media/project-qr.css">
 <script defer src="https://niannianweike.top/media/project-qr.js"></script>
@@ -14,19 +18,23 @@
 <body>
   <main class="desk">
     <header class="masthead">
-      <a href="/tools/html/">← 教具库</a>
+      <div class="masthead-left">
+        <a href="/tools/html/">← 教具库</a>
+        <button type="button" class="switch-edition-btn" id="switch-edition" hidden>换教材版本</button>
+      </div>
       <button type="button" class="project-qr-trigger" data-project-qr data-project-qr-rotation aria-controls="project-qr-panel" aria-expanded="false">联系我</button>
     </header>
     <div class="headline">
-      <p class="edition">人教 PEP · 小学英语</p>
+      <p class="edition" id="edition-banner">小学英语 · 单词对战</p>
       <h1>单词保卫战</h1>
-      <p class="instruction">选一本课本翻开，再挑一个单元</p>
+      <p class="instruction" id="desk-instruction">请先选择教材版本</p>
     </div>
     <div class="stage">
       <div class="table" aria-hidden="true"></div>
       <div class="zombie zombie-left" aria-hidden="true"><img src="desk-zombie.svg" alt=""><span class="word-tag">apple</span></div>
       <div class="zombie zombie-right" aria-hidden="true"><img src="desk-zombie.svg" alt=""><span class="word-tag">hello</span></div>
-      <div class="books" aria-label="按年级选课本">
+      <section class="edition-picker" id="edition-picker" aria-label="选择教材版本"></section>
+      <div class="books" id="books-grid" aria-label="按年级选课本" hidden>
         <div class="stack" role="group" aria-label="三年级">
           <div class="book-pile">
             <button class="volume-book upper" type="button" data-volume="volume-0-0"
